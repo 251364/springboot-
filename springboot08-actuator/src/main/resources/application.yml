@@ -1,0 +1,44 @@
+
+#management:
+#  security:
+#    enabled: false  #默认是安全的，改为false，就可以访问监控的内容了
+
+
+##1  测试1 访问http://localhost:8080/info
+#info:
+#  app:
+#   id: hello
+#   version: 1.0.0   
+
+
+
+#2   
+#远程应用关闭
+#endpoints:
+#  shutdown:
+#    enabled: true
+
+#定制端點点http://localhost:8080/beans  变成  http://localhost:8080/mybean 
+#   beans:
+#    id: mybean
+
+#关闭端点，那么http://localhost:8080/mybean 就不能呗访问了
+#  beans:
+#   enaled: false
+
+
+#关闭所有观点,只保留beans
+# enabled: false
+# beans:
+#    enabled: true
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,157 @@
+#日志
+#注意下面的是默认的配置日志，啥都不用动，只要配置文件即可，假如假如logback.xml或者logback-spring.xml
+#就会不使用默认的配置了，直接使用.xml配置了logback.xml：直接就被日志框架识别了；
+#logback-spring.xml：日志框架就不直接加载日志的配置项，由SpringBoot解析日志配置，可以使用SpringBoot
+#的高级Profile功能
+##logging:
+##指定路径，会在当前项目下创建叫mylog文件
+##  file: log/mylog
+##指定具体路径，加入是/logging/mylog,会在当前项目根目录下创建logging文件夹，下mylog文件
+##  path: F:/logging/mylog
+#
+#
+##在application.properties中这样设置
+# # 在控制台输出的日志的格式
+##logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss.SSS} ----> [%thread] ---> %-5level %logger{50} - %msg%n
+## 指定文件中日志输出的格式
+##logging.pattern.file=%d{yyyy‐MM‐dd} === [%thread] === %‐5level === %logger{50} ==== %msg%n
+#
+#
+#
+##  设置级别level：要记录的日志级别，包括 TRACE < DEBUG < INFO < WARN < ERROR
+#  level:
+#    cn.spring: trace
+
+  
+  
+  
+  
+  
+# 数据库设置
+  
+spring:
+  datasource:
+#   数据源基本配置
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+##   数据源其他配置
+#    initialSize: 5
+#    minIdle: 5
+#    maxActive: 20
+#    maxWait: 60000
+#    timeBetweenEvictionRunsMillis: 60000
+#    minEvictableIdleTimeMillis: 300000
+#    validationQuery: SELECT 1 FROM DUAL
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    poolPreparedStatements: true
+
+
+
+
+
+
+
+#建表语句设置
+
+##    schema:
+##       - classpath:sql/department.sql
+##       - classpath:sql/employee.sql
+
+
+
+
+
+##       
+##   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+#    filters: stat,wall,log4j
+#    maxPoolPreparedStatementPerConnectionSize: 20
+#    useGlobalDataSourceStat: true
+#    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+
+
+
+
+#mybatis映射文件设置，再这主要用来对数据库增删改查
+mybatis:
+  # 指定全局配置文件位置
+  config-location: classpath:mybatis/mybatis-config.xml
+  # 指定sql映射文件位置
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+#  #如果用注解方式在这开启驼峰命名
+#  configuration:
+#    map-underscore-to-camel-case: true
+
+
+
+
+
+#设置端口
+
+# server:
+#  port: 8081
+#spring:
+#  profiles:
+#    active: prod
+#
+#---
+#server:
+#  port: 8083
+#spring:
+#  profiles: dev
+#
+#
+#---
+#
+#server:
+#  port: 8084
+#spring:
+#  profiles: prod 
+
+
+
+
+#配置访问路径
+
+#     配置spring.mvc.static-path-pattern
+#默认情况下，会映射资源/** 但您可以通过spring.mvc.static-path-pattern调整该资源。
+#也就是说，他的作用就是Spring Boot应该以什么样的路径来访问静态资源，只有静态资源满足什么样的条件，
+#Spring Boot才会处理静态资源请求。
+#例如，重新定位所有资源/resources/** 可以实现如下：
+##这表示只有静态资源的访问路径为/resources/**时，才会处理请求
+#spring.mvc.static-path-pattern=/resources/**
+#
+#     配置spring.resources.static-locations
+# 您还可以使用spring.resources.static-locations（使用目录位置列表替换默认值）自定义静态资源位置 。
+# 如果执行此操作，默认的欢迎页面检测将切换到您的自定义位置。因此，如果index.html您的任何位置在启动时存在，
+# 它将成为应用程序的主页。也就是说，他的作用就是告诉Spring Boot应该在何处查找静态资源文件，这是一个列表性的配置，
+# 查找文件时会依赖于配置的先后顺序依次进行，（四个静态资源目录）默认的官方配置如下：
+#spring.resources.static-locations=classpath:/static,classpath:/public,classpath:/resources,classpath:/META-INF/resource
+
+
+
+#在web-inf下设置配置Jsp页面
+
+#spring.mvc.view.prefix=/WEB-INF/
+#spring.mvc.view.suffix=.jsp
+#
+#spring:
+#  mvc:
+#     view:
+#       prefix: /WEB-INF/
+#
+#spring:
+#  mvc:
+#     view:
+#       suffix: .jsp
+
+
+
+
+

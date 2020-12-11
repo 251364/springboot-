@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ProductOrderMapper">	
+	<!--id查询成品出库订单-->
+	<select id="getProductOrderByOrderId" parameterType="java.lang.Long" resultType="com.example.demo.bean.ProductOrder">
+		select * from productorder where orderId=#{orderId}
+	</select>
+	
+	<!--分页查询成品出库订单-->
+	<select id="selectPage" resultType="com.example.demo.bean.ProductOrder">
+		
+		select * from productorder where 
+		<!--订单编号-->
+		<if test="productOrder.orderNo !=null and productOrder.orderNo !=''">
+			 orderNo like CONCAT('%',#{productOrder.orderNo},'%')
+		</if>
+		<!--销售订单编号-->
+		<if test="productOrder.saleOrderNo !=null and productOrder.saleOrderNo !=''">
+			AND saleOrderNo like CONCAT('%',#{productOrder.saleOrderNo},'%')
+		</if>
+		<!--客户编号-->
+		<if test="productOrder.customerNo !=null and productOrder.customerNo !=''">
+			AND customerNo like CONCAT('%',#{productOrder.customerNo},'%')
+		</if>
+		<!--客户名称-->
+		<if test="productOrder.customerName !=null and productOrder.customerName !=''">
+			AND customerName like CONCAT('%',#{productOrder.customerName},'%')
+		</if>
+		<!--订单类型-->
+		<if test="productOrder.orderType !=null">
+			AND orderType = #{productOrder.orderType}
+		</if>
+		<!--制单人-->
+		<if test="productOrder.applyPersonName !=null and productOrder.applyPersonName !=''">
+			AND applyPersonName like CONCAT('%',#{productOrder.applyPersonName},'%')
+		</if>
+		<!--状态-->
+		<if test="productOrder.state !=null">
+			AND state = #{productOrder.state}
+		</if>
+		<!--成品信息-->
+		<if test="productOrder.productName !=null and productOrder.productName !=''">
+			AND productName like CONCAT('%',#{productOrder.productName},'%')
+		</if>
+		<!--出库日期-->
+		<if test="productOrder.completeTimeStart !=null">
+			AND completeTimeStart &gt;= #{productOrder.completeTimeStart}
+		</if>
+		<if test="productOrder.completeTimeEnd !=null">
+			AND completeTimeEnd &lt;= #{productOrder.completeTimeEnd}
+		</if>
+		order by createTime desc limit #{currentPage},#{pageSize}
+		
+	</select>
+	
+</mapper>

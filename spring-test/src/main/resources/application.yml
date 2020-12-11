@@ -1,0 +1,46 @@
+server:
+  port: 8081
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  datasource:
+#   数据源基本配置
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/dzfl?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+ #spring boot 文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+  
+#springboot 针对jackson是自动化配置的
+  jackson:
+   #日期格式化
+    date-format: yyyy-MM-dd HH:mm:ss
+   #决定返回的日期是否会被转换为时间戳，该属性默认为true，不配置该属性默认返回时间戳。   只作用于出参
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: GMT+8     
+    parser:
+      #允许出现单引号
+      allow-single-quotes: true
+      #允许出现特殊字符和转义符
+      allow-unquoted-field-names: true
+     
+mybatis:
+  # 指定全局配置文件位置
+  config-location: classpath:mybatis/mybatis-config.xml
+  # 指定sql映射文件位置
+  mapper-locations: classpath:mybatis/mapper/*.xml
+#  configuration:
+#   map-underscore-to-camel-case: true
+
+#配置分页查询
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
